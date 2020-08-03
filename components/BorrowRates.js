@@ -7,9 +7,6 @@ export const BORROW_RATES_QUERY = gql`
       name
     }
   }
-  # _allBorrowRatesMeta {
-  #   count
-  # }
 `;
 
 export const borrowRatesQueryVars = {
@@ -42,7 +39,6 @@ export default function BorrowRates() {
   if (loading && !loadingMorePosts) return <div>Loading</div>;
 
   const { markets } = data;
-  // const areMorePosts = markets.length < _allBorrowRatesMeta.count;
 
   return (
     <section>
@@ -53,11 +49,7 @@ export default function BorrowRates() {
           </li>
         ))}
       </ul>
-      {/* {areMorePosts && (
-        <button onClick={() => loadMorePosts()} disabled={loadingMorePosts}>
-          {loadingMorePosts ? "Loading..." : "Show More"}
-        </button>
-      )} */}
+
       <style jsx>{`
         section {
           padding-bottom: 20px;

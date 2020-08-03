@@ -1,28 +1,37 @@
-// import Me, { ME_QUERY, MeQueryVars } from "../components/Me";
-import BorrowRates, {
-  BORROW_RATES_QUERY,
-  borrowRatesQueryVars,
-} from "../components/BorrowRates";
+import UniswapList, {
+  UNISWAP_QUERY,
+  uniswapQueryVars,
+} from "../components/Uniswap";
 import { initializeApollo } from "../lib/apolloClient";
+import BalancerList, {
+  BALANCER_QUERY,
+  balancerQueryVars,
+} from "../components/Balancer";
 
 const IndexPage = () => (
   <div>
-    <h1>Heyyyy</h1>
-    <BorrowRates />
+    <h1>Total Trade Volume</h1>
+    <div style={{ display: "flex" }}>
+      <UniswapList />
+      <BalancerList />
+    </div>
   </div>
 );
 
 export async function getStaticProps() {
   const apolloClient = initializeApollo();
 
-  // await apolloClient.query({
-  //   query: ME_QUERY,
-  //   variables: MeQueryVars,
-  // });
+  await apolloClient.query({
+    query: UNISWAP_QUERY,
+    variables: uniswapQueryVars,
+  });
 
   await apolloClient.query({
-    query: BORROW_RATES_QUERY,
-    variables: borrowRatesQueryVars,
+    query: BALANCER_QUERY,
+    variables: balancerQueryVars,
+    context: {
+      dataSrc: "balancer",
+    },
   });
 
   return {
